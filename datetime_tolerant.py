@@ -29,18 +29,23 @@ class datetime_tolerant(datetime):
         """A < operator for datetime that is tolerant of comparing
            timezone aware and unaware objects
         """
+        if not self.tzinfo and not other.tzinfo:
+            return datetime.__lt__(self, other)
         return datetime.__lt__(self.get_with_tz(self), self.get_with_tz(other))
 
     def __gt__(self, other):
+        if not self.tzinfo and not other.tzinfo:
+            return datetime.__gt__(self, other)
         return datetime.__gt__(self.get_with_tz(self), self.get_with_tz(other))
 
     def __eq__(self, other):
+        if not self.tzinfo and not other.tzinfo:
+            return datetime.__eq__(self, other)
         return datetime.__eq__(self.get_with_tz(self), self.get_with_tz(other))
 
     def __sub__(self, other):
-        print("Calculating", self, "-", other)
-        print("Really calculating", self.get_with_tz(self),
-              "-", self.get_with_tz(other))
+        if not self.tzinfo and not other.tzinfo:
+            return datetime.__sub__(self, other)
         return datetime.__sub__(self.get_with_tz(self), self.get_with_tz(other))
 
 
