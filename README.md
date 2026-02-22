@@ -3,9 +3,12 @@
 **datetime_tolerant** is a class derived from datetime that's more tolerant
 in comparisons like <, > and == and in date subtraction.
 
-By default, if a datetime_tolerant object doesn't have a timezone specified,
-it will compare as if it's in the local time zone.
-However, you can change the default to a specific timezone
+datetime_tolerant objects that have timezones specified ("timezone aware")
+will honor their time zones.
+If a datetime_tolerant object doesn't have a timezone specified
+(i.e. it's "unaware" or "naive"),
+by default, it will compare as if it's in the local time zone.
+However, you can change that default to a specific timezone
 with `set_default_timezone`:
 
 ```
